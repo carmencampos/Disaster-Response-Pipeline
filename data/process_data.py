@@ -15,7 +15,7 @@ def load_data(messages, categories):
   # merge datasets
   df = pd.merge(messages, categories)
   
-  return df
+  return df, categories
 
 
 def preprocessing_data(df):
@@ -57,8 +57,8 @@ def save_data(df, db_name):
 
 def main():
   args = sys.argv[1:]
-  df = load_data(args[0], args[1])
-  df = preprocessing_data(df)
+  df, categories = load_data(args[0], args[1])
+  df = preprocessing_data(df, categories)
   save_data(df, args[2])
 
 
