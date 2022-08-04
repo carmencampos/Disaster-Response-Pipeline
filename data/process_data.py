@@ -18,7 +18,7 @@ def load_data(messages, categories):
   return df, categories
 
 
-def preprocessing_data(df):
+def processing_data(df):
   # create a dataframe of the 36 individual category columns
   categories = categories['categories'].str.split(';', expand=True)
 
@@ -58,7 +58,7 @@ def save_data(df, db_name):
 def main():
   args = sys.argv[1:]
   df, categories = load_data(args[0], args[1])
-  df = preprocessing_data(df, categories)
+  df = processing_data(df, categories)
   save_data(df, args[2])
 
 
