@@ -50,7 +50,7 @@ def tokenize(text):
     
 def build_model():
     # text processing and model pipeline
-    pipeline = Pipeline([
+    model_pipeline = Pipeline([
         ('vect', CountVectorizer(tokenize)),
         ('tfidf', TfidfTransformer()),
         ('moc', MultiOutputClassifier(RandomForestClassifier(n_estimators=10, random_state=1)))
@@ -70,7 +70,7 @@ def train(X, y, model):
     X_train, X_test, y_train, y_test = train_test_split(X, y)
 
     # fit model
-    pipeline.fit(X_train, y_train)
+    model.fit(X_train, y_train)
 
     # output model test results
     y_pred = pipeline.predict(X_test)
