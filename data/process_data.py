@@ -7,30 +7,38 @@ from sqlalchemy import create_engine
 
 
 def load_data(messages, categories):
-  # load messages dataset
+  """
+  load messages dataset
+  load categories dataset
+  merge datasets
+  """
   messages = pd.read_csv(messages)
-  # load categories dataset
   categories = pd.read_csv(categories.css)
 
-  # merge datasets
   df = pd.merge(messages, categories)
   
   return df, categories
 
 
 def processing_data(df):
-  # create a dataframe of the 36 individual category columns
+  """
+  create a dataframe of the 36 individual category columns
+  select the first row of the categories dataframe
+  use this row to extract a list of new column names for categories.
+  one way is to apply a lambda function that takes everything 
+  up to the second to last character of each string with slicing
+  rename the columns of `categories`
+  drop the original categories column from `df`
+  concatenate the original dataframe with the new `categories` dataframe
+  drop duplicates
+  """
   categories = categories['categories'].str.split(';', expand=True)
 
-  # select the first row of the categories dataframe
   row = categories.iloc[0]
 
-  # use this row to extract a list of new column names for categories.
-  # one way is to apply a lambda function that takes everything 
-  # up to the second to last character of each string with slicing
   category_colnames = row.apply(lambda x : x[:len(x) - 2])
 
-  # rename the columns of `categories`
+
   categories.columns = category_colnames
   categories.head()
 
@@ -40,13 +48,10 @@ def processing_data(df):
     # convert column from string to numeric
     categories[column] = categories[column].astype(int)
 
-  # drop the original categories column from `df`
   df.drop(columns=['categories'], inplace=True)
 
-  # concatenate the original dataframe with the new `categories` dataframe
   df = pd.concat([df, categories], axis=1)
 
-  # drop duplicates
   df.drop_duplicates(inplace=True)
 
 
