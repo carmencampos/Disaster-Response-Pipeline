@@ -67,13 +67,17 @@ def build_model():
 
 def train(X, y, model):
     # train test split
-    X_train, X_test, y_train, y_test = train_test_split(X, Y)
+    X_train, X_test, y_train, y_test = train_test_split(X, y)
 
     # fit model
     pipeline.fit(X_train, y_train)
 
     # output model test results
     y_pred = pipeline.predict(X_test)
+    y_pred_df = pd.DataFrame(y_pred, index = y_test.index, columns = y_test.columns)
+    for column in y_train.columns:
+        print(column)
+        print(classification_report(y_test[column], y_pred_df[column]))
 
     return model
 
