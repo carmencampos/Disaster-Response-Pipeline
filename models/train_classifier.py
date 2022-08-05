@@ -1,6 +1,5 @@
 # python train_classifier.py ../data/DisasterResponse.db classifier.pkl
 
-
 # import packages
 import sys
 import pandas as pd
