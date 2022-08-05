@@ -51,7 +51,7 @@ def tokenize(text):
     
 def build_model():
     # text processing and model pipeline
-    model_pipeline = Pipeline([
+    pipeline = Pipeline([
         ('vect', CountVectorizer(tokenize)),
         ('tfidf', TfidfTransformer()),
         ('moc', MultiOutputClassifier(RandomForestClassifier(n_estimators=10, random_state=1)))
