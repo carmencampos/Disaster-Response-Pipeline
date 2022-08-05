@@ -29,7 +29,7 @@ def load_data(data_file):
     df.to_sql('messages', engine, index=False)
 
     # define features and label arrays
-    X = df[['message']]
+    X = df['message']
     y = df[df.columns.difference(['message', 'genre', 'id', 'original'])]
 
     return X, y
@@ -69,7 +69,7 @@ def train(X, y, model):
     X_train, X_test, y_train, y_test = train_test_split(X, Y)
 
     # fit model
-    pipeline.fit(X, Y)
+    pipeline.fit(X_train, y_train)
 
     # output model test results
     y_pred = pipeline.predict(X_test)
