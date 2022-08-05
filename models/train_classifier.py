@@ -89,7 +89,7 @@ def train(X, y, model):
 
 def export_model(model):
     # Export model as a pickle file
-    pickle.dump(model, open('my_model', 'wb'))
+    pickle.dump(model, open('my_model.pkl', 'wb'))
 
 
 def run_pipeline(data_file):
