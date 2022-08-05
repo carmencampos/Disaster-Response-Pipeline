@@ -19,18 +19,21 @@ import pickle
 
 
 def load_data(data_file):
-    # read in file
-    # load data from database
+    """
+    parameter data file label
+    read in file
+    load data from database
+    clean data
+    load to database
+    define features and label arrays
+    """
     engine = create_engine('sqlite:///' + data_file)
     df = pd.read_sql_table('messages', engine)
-
-    # clean data
+    
     df.dropna(inplace=True)
 
-    # load to database
     df.to_sql('messages', engine, index=False)
 
-    # define features and label arrays
     X = df['message']
     y = df[df.columns.difference(['message', 'genre', 'id', 'original'])]
 
@@ -38,6 +41,9 @@ def load_data(data_file):
 
 
 def tokenize(text):
+    """
+    tokenize, lemmatize and clean a text
+    """
     tokens = word_tokenize(text)
     lemmatizer = WordNetLemmatizer()
 
@@ -50,34 +56,38 @@ def tokenize(text):
     
     
 def build_model():
-    # text processing and model pipeline
+    """
+    text processing and model pipeline
+    define parameters for GridSearchCV
+    create gridsearch object and return as final model pipeline
+    """
     pipeline = Pipeline([
         ('vect', CountVectorizer(tokenize)),
         ('tfidf', TfidfTransformer()),
         ('moc', MultiOutputClassifier(RandomForestClassifier(n_estimators=10, random_state=1)))
     ])
     
-    # define parameters for GridSearchCV
     pipeline.get_params().keys()
     parameters = {
         'moc__estimator__n_estimators': [15, 20, 30, 50, 100],
         'moc__estimator__min_samples_split': [2, 3, 4]
     }
     
-    # create gridsearch object and return as final model pipeline
     model_pipeline = GridSearchCV(pipeline, param_grid=parameters)
 
     return model_pipeline
 
 
 def train(X, y, model):
-    # train test split
+    """
+    train test split
+    fit model
+    output model test results
+    """
     X_train, X_test, y_train, y_test = train_test_split(X, y)
 
-    # fit model
     model.fit(X_train, y_train)
 
-    # output model test results
     y_pred = pipeline.predict(X_test)
     y_pred_df = pd.DataFrame(y_pred, index = y_test.index, columns = y_test.columns)
     for column in y_train.columns:
@@ -88,7 +98,9 @@ def train(X, y, model):
 
 
 def export_model(model):
-    # Export model as a pickle file
+    """
+    Export model as a pickle file
+    """
     pickle.dump(model, open('my_model.pkl', 'wb'))
 
 
