@@ -16,6 +16,7 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
 from sklearn.model_selection import GridSearchCV
+import pickle
 
 
 def load_data(data_file):
@@ -58,10 +59,14 @@ def build_model():
     ])
     
     # define parameters for GridSearchCV
-
-
+    pipeline.get_params().keys()
+    parameters = {
+        'moc__estimator__n_estimators': [15, 20, 30, 50, 100],
+        'moc__estimator__min_samples_split': [2, 3, 4]
+    }
+    
     # create gridsearch object and return as final model pipeline
-
+    model_pipeline = GridSearchCV(pipeline, param_grid=parameters)
 
     return model_pipeline
 
@@ -85,7 +90,7 @@ def train(X, y, model):
 
 def export_model(model):
     # Export model as a pickle file
-
+    pickle.dump(model, open('my_model', 'wb'))
 
 
 def run_pipeline(data_file):
