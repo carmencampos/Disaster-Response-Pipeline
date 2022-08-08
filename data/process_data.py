@@ -17,7 +17,7 @@ def load_data(messages, categories):
 
   df = pd.merge(messages, categories)
   
-  return df, categories
+  return pd.DataFrame(df), categories
 
 
 def clean_data(df):
