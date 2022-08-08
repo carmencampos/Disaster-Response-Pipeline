@@ -32,7 +32,7 @@ def clean_data(df):
   concatenate the original dataframe with the new `categories` dataframe
   drop duplicates
   """
-  categories = categories['categories'].str.split(';', expand=True)
+  categories = df['categories'].str.split(';', expand=True)
 
   row = categories.iloc[0]
 
@@ -69,7 +69,7 @@ def main():
               .format(messages_filepath, categories_filepath))
         df = load_data(messages_filepath, categories_filepath)
 
-        print('Cleaning data...')
+        print(type(df))#('Cleaning data...')
         df = clean_data(df)
         
         print('Saving data...\n    DATABASE: {}'.format(database_filepath))
