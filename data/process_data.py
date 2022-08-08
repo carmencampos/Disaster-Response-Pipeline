@@ -13,7 +13,7 @@ def load_data(messages, categories):
   merge datasets
   """
   messages = pd.read_csv(messages)
-  categories = pd.read_csv(categories.csv)
+  categories = pd.read_csv(categories)
 
   df = pd.merge(messages, categories)
   
