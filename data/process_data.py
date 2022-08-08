@@ -17,7 +17,7 @@ def load_data(messages, categories):
 
   df = pd.merge(messages, categories)
   
-  return pd.DataFrame(df), categories
+  return df, categories
 
 
 def clean_data(df):
@@ -32,6 +32,7 @@ def clean_data(df):
   concatenate the original dataframe with the new `categories` dataframe
   drop duplicates
   """
+  df = pd.DataFrame(df)
   categories = df['categories'].str.split(';', expand=True)
 
   row = categories.iloc[0]
