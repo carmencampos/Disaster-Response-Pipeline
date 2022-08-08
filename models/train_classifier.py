@@ -1,4 +1,4 @@
-# python train_classifier.py ../data/DisasterResponse.db classifier.pkl
+# python train_classifier.py ../data/DisasterMessages.db my_model.pkl
 
 # import packages
 import sys
