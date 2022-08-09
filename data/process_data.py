@@ -1,4 +1,4 @@
-# process_data.py messages.csv categories.csv DisasterResponse.db
+# python process_data.py messages.csv categories.csv DisasterMessages.db
 
 # import libraries
 import sys
