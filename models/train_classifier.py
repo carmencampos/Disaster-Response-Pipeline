@@ -64,7 +64,7 @@ def build_model():
     pipeline = Pipeline([
         ('vect', CountVectorizer(tokenize)),
         ('tfidf', TfidfTransformer()),
-        ('moc', MultiOutputClassifier(RandomForestClassifier(n_estimators=10, random_state=1)))
+        ('moc', MultiOutputClassifier(RandomForestClassifier(random_state=1)))
     ])
     
     pipeline.get_params().keys()
