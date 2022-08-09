@@ -69,7 +69,7 @@ def build_model():
     
     pipeline.get_params().keys()
     parameters = {
-        'moc__estimator__n_estimators': [15, 20, 30, 50, 100],
+        'moc__estimator__n_estimators': 50, 100, 200],
         'moc__estimator__min_samples_split': [2, 3, 4]
     }
     
