@@ -32,7 +32,7 @@ def load_data(data_file):
     
     df.dropna(inplace=True)
 
-    df.to_sql('messages', engine, index=False)
+    # df.to_sql('messages', engine, index=False)
 
     X = df['message']
     y = df[df.columns.difference(['message', 'genre', 'id', 'original'])]
