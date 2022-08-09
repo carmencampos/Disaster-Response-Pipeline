@@ -88,7 +88,7 @@ def train(X, y, model):
 
     model.fit(X_train, y_train)
 
-    y_pred = pipeline.predict(X_test)
+    y_pred = model.predict(X_test)
     y_pred_df = pd.DataFrame(y_pred, index = y_test.index, columns = y_test.columns)
     for column in y_train.columns:
         print(column)
