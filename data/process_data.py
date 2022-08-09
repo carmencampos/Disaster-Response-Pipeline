@@ -17,7 +17,7 @@ def load_data(messages, categories):
 
   df = pd.merge(messages, categories)
   
-  return df, categories
+  return df
 
 
 def clean_data(df):
@@ -54,6 +54,8 @@ def clean_data(df):
   df = pd.concat([df, categories], axis=1)
 
   df.drop_duplicates(inplace=True)
+  
+  return df
 
 
 def save_data(df, db_name):
