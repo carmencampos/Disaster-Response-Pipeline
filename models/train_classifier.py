@@ -97,14 +97,14 @@ def train(X, y, model):
     return model
 
 
-def export_model(model):
+def export_model(model, model_path):
     """
     Export model as a pickle file
     """
-    pickle.dump(model, open('my_model.pkl', 'wb'))
+    pickle.dump(model, open(model_path, 'wb'))
 
 
-def run_pipeline(data_file):
+def run_pipeline(data_file, model_path):
     """
     run ETL pipeline
     build model pipeline
@@ -114,11 +114,12 @@ def run_pipeline(data_file):
     X, y = load_data(data_file)  
     model = build_model()  
     model = train(X, y, model)  
-    export_model(model)  
+    export_model(model, model_path)  
 
 if __name__ == '__main__':
     data_file = sys.argv[1]  # get filename of dataset
-    run_pipeline(data_file)  # run data pipeline
+    model_path = sys.argv[2]  # get model path
+    run_pipeline(data_file, model_path)  # run data pipeline
     
 
 
