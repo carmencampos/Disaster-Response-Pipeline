@@ -59,6 +59,8 @@ def clean_data(df):
 
 
 def save_data(df, db_name):
+  # save the data from the data frame which is an input parameter
+  # in the database indicated by its name
   engine = create_engine('sqlite:///' + db_name)
   df.to_sql('messages', engine, index=False)
 
