@@ -39,7 +39,6 @@ def clean_data(df):
 
   category_colnames = row.apply(lambda x : x[:len(x) - 2])
 
-
   categories.columns = category_colnames
   categories.head()
 
