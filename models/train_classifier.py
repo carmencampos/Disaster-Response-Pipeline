@@ -105,11 +105,16 @@ def export_model(model):
 
 
 def run_pipeline(data_file):
-    X, y = load_data(data_file)  # run ETL pipeline
-    model = build_model()  # build model pipeline
-    model = train(X, y, model)  # train model pipeline
-    export_model(model)  # save model
-
+    """
+    run ETL pipeline
+    build model pipeline
+    train model pipeline
+    save model
+    """
+    X, y = load_data(data_file)  
+    model = build_model()  
+    model = train(X, y, model)  
+    export_model(model)  
 
 if __name__ == '__main__':
     data_file = sys.argv[1]  # get filename of dataset
